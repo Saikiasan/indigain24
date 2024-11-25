@@ -1,0 +1,222 @@
+<link rel="stylesheet" href="./css/user.css">
+
+<div class="user-account">
+    <h2>User Account</h2>
+    <div class="profile-section">
+        <div class="profile-image">
+            <i class="ri-user-3-line" style="font-size: 100px;" id="profileImage"></i>
+        </div>
+
+        <div class="profile-details">
+            <h3>Welcome, <span id="userName"></span></h3>
+            <p>Email: <span id="userEmail">johndoe@example.com</span></p>
+            <p>Member Since: <span id="userSince">January 2020</span></p>
+            <p>Membership Level: <span id="userMembership">Gold Member</span></p>
+            <p id="moreDetails"></p>
+            <button class="edit-btn">Edit Profile</button>
+        </div>
+    </div>
+
+    <div class="recommended-section">
+        <h3>Recommended For You</h3>
+        <div class="recommended-items"></div>
+    </div>
+
+    <div class="order-history">
+        <h3>Your Order History</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#1001</td>
+                    <td>Creatine Monohydrate</td>
+                    <td>$29.99</td>
+                    <td>Shipped</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        const reContainer = $('.recommended-items');
+
+        fetch('./db/data.json')
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`Failed to fetch data: ${res.status}`);
+                }
+                return res.json();
+            }).then((data) => {
+                const products = Object.values(data).flat();
+
+                if (!Array.isArray(products)) {
+                    throw new Error("Flattened data is not an array.");
+                }
+
+                const randomItems = getRandomItems(products, 3);
+                reContainer.empty();
+
+                randomItems.forEach((product) => {
+                    const itemHTML = `
+    <div class="recommended-item">
+        <img src="${product.image}" alt="${product.name}" />
+        <h4>${product.name}</h4>
+    </div>
+    `;
+                    reContainer.append(itemHTML);
+                });
+            }).catch((error) => {
+                console.error("Error fetching products:", error);
+            });
+
+        function getRandomItems(array, count) {
+            const shuffled = array
+                .map((item) => ({
+                    item,
+                    sort: Math.random()
+                }))
+                .sort((a, b) => a.sort - b.sort)
+                .map(({
+                    item
+                }) => item);
+            return shuffled.slice(0, count);
+        }
+
+        fetch('./db/user.json')
+            .then((res) => res.json())
+            .then((data) => {
+                const getMembershipLevel = (level) => {
+                    switch (level) {
+                        case 1:
+                            return "Bronze Member";
+                        case 2:
+                            return "Silver Member";
+                        case 3:
+                            return "Gold Member";
+                        case 4:
+                            return "Platinum Member";
+                        default:
+                            return "Standard Member";
+                    }
+                };
+
+                const getGender = (sex) => {
+                    if (sex == 0) {
+                        return "Female";
+                    } else {
+                        return "Male";
+                    }
+                }
+
+                const md = document.querySelector('#moreDetails');
+                document.getElementById("userName").textContent = data.name;
+                document.getElementById("userEmail").textContent = data.email;
+                document.getElementById("userSince").textContent = data.joined;
+                document.getElementById("userMembership").textContent = getMembershipLevel(data.level);
+
+
+                if (data.sex) {
+                    const genderEl = document.createElement('p');
+                    genderEl.textContent = `Gender: ${getGender(data.sex)}`;
+                    md.appendChild(genderEl);
+                }
+                if (data.address) {
+                    const addressElement = document.createElement('p');
+                    addressElement.textContent = `Address: ${data.address}`;
+                    md.appendChild(addressElement);
+                }
+                if (data.mobile) {
+                    const mobileElement = document.createElement('p');
+                    mobileElement.textContent = `Mobile: ${data.mobile}`;
+                    md.appendChild(mobileElement);
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching user data:", error);
+            });
+
+    });
+</script>
+
+<script>
+    const orderHistoryTable = document.querySelector(".order-history tbody");
+    const numberOfOrders = 10;
+
+    fetch('./db/data.json')
+        .then((res) => res.json())
+        .then((data) => {
+            const allProducts = Object.values(data).flat();
+            const randomProducts = getRandomItems(allProducts, numberOfOrders);
+
+            orderHistoryTable.innerHTML = "";
+
+            randomProducts.forEach((product) => {
+                const randomOrderId = generateRandomOrderId();
+                const randomStatus = getRandomStatus();
+
+                const statusStyles = (status) => {
+                    if (status === "Delivered") {
+                        return "color: green; font-weight: bold;";
+                    } else if (status === "Pending") {
+                        return "color: orange;";
+                    } else if (status === "Cancelled") {
+                        return "color: red; text-decoration: line-through;";
+                    }
+                    return "";
+                };
+
+                const trStyle = (status) => {
+                    switch (status) {
+                        case "Delivered":
+                            return "background:black; font-weight:bold; color:green";
+                        case "Shipped":
+                            return "background:black; font-weight:bold; color:white";
+                        case "Pending":
+                            return "background:black; font-weight:bold; color:yellow";
+                        default:
+                            return "background:black; font-weight:bold; color:red";
+                    }
+
+                };
+
+                const rowHTML = `
+                    <tr>
+                        <td>#${randomOrderId}</td>
+                        <td>${product.name}</td>
+                        <td>${product.price}</td>
+                        <td class="status" style="${statusStyles(randomStatus)}">${randomStatus}</td>
+                    </tr>
+                `;
+
+                orderHistoryTable.insertAdjacentHTML("beforeend", rowHTML);
+            });
+        })
+        .catch((error) => {
+            console.error("Error fetching product data:", error);
+        });
+
+    function generateRandomOrderId() {
+        return Math.floor(100000 + Math.random() * 900000);
+    }
+
+    function getRandomStatus() {
+        const statuses = ["Pending", "Shipped", "Delivered", "Cancelled"];
+        return statuses[Math.floor(Math.random() * statuses.length)];
+    }
+
+    function getRandomItems(array, count) {
+        const shuffled = array.sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, count);
+    }
+</script>

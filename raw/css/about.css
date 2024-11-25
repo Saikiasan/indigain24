@@ -1,0 +1,48 @@
+.about {
+  padding: 60px 40px;
+  background: linear-gradient(135deg, #fdfdfd, #f3f3f3);
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  max-width: 900px;
+  margin: 30px auto;
+  font-family: "Arial", sans-serif;
+  line-height: 1.8;
+  color: #444;
+}
+
+.about h2 {
+  text-transform: uppercase;
+  font-size: 32px;
+  color: #ff5722;
+  border-bottom: 3px solid #ff5722;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+}
+
+.about h3 {
+  margin-top: 30px;
+  font-size: 24px;
+  color: #333;
+}
+
+.about p {
+  font-size: 18px;
+  margin: 15px 0;
+  text-align: justify;
+}
+
+.about-list {
+  margin-top: 15px;
+  padding-left: 20px;
+}
+
+.about-list li {
+  font-size: 18px;
+  margin: 10px 0;
+  list-style: disc;
+}
+
+.about strong {
+  color: #333;
+  font-weight: bold;
+}

@@ -1,0 +1,58 @@
+<!-- 
+Project Details
+Owner: Biki Kumar Prasad
+Date: 16-11-2024
+Project Title: Web-based SPA | Fitness Retail Store Website
+Description: 
+    This project is a single-page application (SPA) designed as a fitness retail store.
+    Built using HTML, CSS, JavaScript, and third-party libraries, it implements 
+    routing, dynamic rendering, and data fetching.
+
+Usage:
+    - The HTML acts as a container, dynamically rendering views using JavaScript.
+    - Modular architecture ensures clean, reusable code.
+    - Gulp is used for automating tasks such as minifying CSS and optimizing assets for production.
+
+Technology Stack:
+    - HTML5, CSS3, JavaScript ES6+
+    - jQuery, SweetAlert2, FontAwesome, Remix Icons
+    - Gulp for task automation (CSS minification, file optimization, etc.)
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Fitness Retail Store</title>
+
+        <!-- External Libraries -->
+        <!-- FONT-AWESOME CSS: Provides vector icons -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+        <!-- REMIX-ICONS CSS: Icon library for additional assets -->
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+        <!-- JQUERY JS LIB: Simplifies DOM manipulation -->
+        <script src="./js/jquery.min.js"></script>
+
+        <!-- SWEETALERT2 JS LIB: Handles modals and alerts -->
+        <script src="./js/sweetalert2.all.min.js"></script>
+    </head>
+
+    <body>
+
+        <!-- Root container for rendering SPA views -->
+        <!-- Navigation and other elements will be loaded dynamically -->
+        <main id="root"></main>
+
+        <!-- Router Script -->
+        <!-- Handles URL-based navigation and view rendering -->
+        <script type="module" src="./js/router.js"></script>
+
+    </body>
+
+</html>

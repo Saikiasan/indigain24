@@ -1,0 +1,159 @@
+<link rel="stylesheet"href="./css/cart.min.css"><div class="cart-page"><h2>Your Shopping Cart</h2><div id="cart-items-list"></div><div class="cart-summary"><h3>Cart Summary</h3><p>Total Items:<span id="total-items">0</span></p><p>Total Price: &#x20B9;<span id="total-price">0.00</span></p><button id="checkout-btn"class="checkout-btn">Proceed to Checkout</button></div></div><script>const DB_NAME = "SaikiaCodes_2024";
+    const DB_VERSION = 1;
+    const STORE_NAME = "items";
+
+    function openDatabase() {
+        const deferred = $.Deferred();
+        const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+        request.onupgradeneeded = function (event) {
+            const db = event.target.result;
+            if (!db.objectStoreNames.contains(STORE_NAME)) {
+                db.createObjectStore(STORE_NAME, {
+                    keyPath: "id",
+                    autoIncrement: true,
+                });
+            }
+        };
+
+        request.onsuccess = function (event) {
+            deferred.resolve(event.target.result);
+        };
+
+        request.onerror = function () {
+            deferred.reject("Database failed to open");
+        };
+
+        return deferred.promise();
+    }
+
+    function getItems() {
+        const deferred = $.Deferred();
+
+        openDatabase()
+            .done(function (db) {
+                const tx = db.transaction(STORE_NAME, "readonly");
+                const store = tx.objectStore(STORE_NAME);
+                const request = store.getAll();
+
+                request.onsuccess = function () {
+                    deferred.resolve(request.result || []);
+                };
+
+                request.onerror = function () {
+                    deferred.reject("Failed to retrieve items");
+                };
+            })
+            .fail(function (error) {
+                deferred.reject("Failed to retrieve items: " + error);
+            });
+
+        return deferred.promise();
+    }
+
+    function deleteItem(id) {
+        const deferred = $.Deferred();
+
+        openDatabase()
+            .done(function (db) {
+                const tx = db.transaction(STORE_NAME, "readwrite");
+                const store = tx.objectStore(STORE_NAME);
+                const request = store.delete(String(id));
+                console.log(String(id))
+
+                request.onsuccess = function () {
+                    console.log("Item deleted successfully with ID:", id);
+                    deferred.resolve("Item deleted successfully");
+                };
+
+                request.onerror = function (event) {
+                    console.error("Failed to delete item with ID:", id, event.target
+                        .error);
+                    deferred.reject("Failed to delete item: " + event.target.error);
+                };
+
+                tx.oncomplete = function () {
+                    console.log("Transaction completed successfully");
+                };
+
+                tx.onerror = function (event) {
+                    console.error("Transaction failed:", event.target.error);
+                    deferred.reject("Transaction failed: " + event.target.error);
+                };
+            })
+            .fail(function (error) {
+                console.error("Failed to open database:", error);
+                deferred.reject("Failed to delete item: " + error);
+            });
+
+        return deferred.promise();
+    }</script><script>$(document).ready(function () {
+        function displayCartItems() {
+            const $cartItemsList = $("#cart-items-list");
+            const $totalItems = $("#total-items");
+            const $totalPrice = $("#total-price");
+
+            getItems()
+                .done(function (cartItems) {
+                    $cartItemsList.empty();
+
+                    if (cartItems.length === 0) {
+                        $cartItemsList.html("<span class=\"empty\">Your cart is empty.</span>");
+                        $('.cart-summary').empty();
+                        $totalItems.text(0);
+                        $totalPrice.text("0.00");
+                        return;
+                    }
+
+                    let totalItemsCount = 0;
+                    let totalPriceAmount = 0;
+
+                    cartItems.forEach((item) => {
+                        totalItemsCount++;
+                        const p = item.price.replace(/&#x20B9; /g, '');
+                        const pi = p.replace(/,/g, '');
+                        const price = parseInt(pi) || 0;
+                        totalPriceAmount += price;
+
+                        const cartItemHTML = `
+                            <div class="cart-item" data-id="${item.id}">
+                              <img src="${item.image || 'assets/default-product.jpg'}" alt="${item.name}">
+                              <div class="cart-item-details">
+                                <h4>${item.name}</h4>
+                                <p>${item.description || ""}</p>
+                                <p>Price: ${item.price}</p>
+                              </div>
+                              <button class="remove-btn" data-id="${item.id}">Remove</button>
+                            </div>`;
+
+                        $cartItemsList.append(cartItemHTML);
+                    });
+
+                    $totalItems.text(totalItemsCount);
+                    $totalPrice.text(totalPriceAmount);
+                }).fail(function (error) {
+                    console.error("Failed to load cart items:", error);
+                    $cartItemsList.html("<p>Failed to load cart items.</p>");
+                });
+        }
+
+        $(document).on("click", ".remove-btn", function () {
+            const itemId = $(this).data("id");
+            console.log("Removing item with ID:", itemId);
+
+            if (!itemId) {
+                console.error("Invalid or missing item ID:", itemId);
+                return;
+            }
+
+            deleteItem(itemId)
+                .done(function () {
+                    console.log("Item deleted successfully, refreshing cart");
+                    displayCartItems();
+                })
+                .fail(function (error) {
+                    console.error("Failed to remove item:", error);
+                });
+        });
+        displayCartItems();
+    });</script>

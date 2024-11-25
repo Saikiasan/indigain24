@@ -1,0 +1,188 @@
+<!-- Updated Item Render -->
+<div id="render"></div>
+
+<style>
+    /* General layout */
+    #render {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+    }
+
+    /* Item container */
+    .item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+        max-width: 600px;
+        padding: 2rem;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .item .item-img {
+        height: 350px;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .item .item-img img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    .item h2 {
+        font-weight: 600;
+        font-size: 2em;
+        text-transform: capitalize;
+        margin: 1rem 0;
+    }
+
+    .item h3 {
+        font-weight: 700;
+        font-size: 1.2em;
+        color: #333;
+        margin: 1rem 0;
+    }
+
+    .item h3 i {
+        color: red;
+        font-weight: 300;
+        text-decoration: line-through;
+        margin-left: 0.5rem;
+    }
+
+    .item .bsx {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* Button Styling */
+    .item .btn {
+        height: 3.5em;
+        width: 220px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ff6600;
+        border: none;
+        font-size: 1.1em;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .item .btn:hover {
+        background-color: #e55b00;
+        transform: scale(1.05);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .item h2 {
+            font-size: 1.6em;
+        }
+
+        .item h3 {
+            font-size: 1em;
+        }
+
+        .item .btn {
+            width: 100%;
+        }
+    }
+</style>
+<script src="./js/db.js"></script>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    var id = urlParams.get("id");
+
+    if (id) {
+        $.getJSON('./db/data.json', function (data) {
+            let foundItem = null;
+
+            Object.keys(data).forEach(category => {
+                let item = data[category].find(item => item.id === id);
+                if (item) {
+                    foundItem = item;
+                }
+            });
+
+            if (foundItem) {
+                $('#item-name').text(foundItem.name);
+                $('#item-price').html(foundItem.price);
+                $('#item-image').attr('src', foundItem.image);
+
+                var i = ` 
+        <div class="item" data-id="${foundItem.id}">
+          <h2>${foundItem.name}</h2>
+          <div class="item-img">
+            <img src="${foundItem.image}" alt="${foundItem.name}">
+          </div>
+          <h3>${foundItem.price} <i>${foundItem.crossprice ?? ''}</i></h3>
+          <div class="bsx">
+            <button data-index="${foundItem.id}" class="btn">
+              <h4>Add to Cart</h4>
+            </button>
+          </div>
+        </div>`;
+
+                $('#render').append(i);
+            } else {
+                console.log("Item not found!");
+            }
+        });
+    } else {
+        console.log("No ID in URL!");
+    }
+
+    $(document).on('click', '.btn', function () {
+        const itemId = $(this).data('index');
+
+        $.getJSON('./db/data.json', function (data) {
+            let product = null;
+
+            Object.keys(data).forEach(category => {
+                let item = data[category].find(item => item.id == itemId);
+                if (item) {
+                    product = item;
+                    console.log(product)
+                }
+            });
+
+            if (product != null) {
+                addItem(product).then(response => {
+                    console.log(response);
+                    Swal.fire({
+                        title: 'Item Added to Cart',
+                        text: `${product.name} has been added to your cart.`,
+                        icon: 'success',
+                        confirmButtonText: 'Ok',
+                        timer: 3000,
+                        position: 'top-right',
+                        toast: true,
+                    });
+                    updateCartCount();
+                }).catch(error => {
+                    console.error("Failed to add to cart:", error);
+                });
+            } else {
+                console.log("Product not found: " + itemId);
+            }
+        });
+    });
+</script>

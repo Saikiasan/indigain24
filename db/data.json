@@ -1,0 +1,216 @@
+{
+  "preworkout": [
+    {
+      "id": "1",
+      "name": "MUSCLE ASYLUM F9 pre-workout (500g)",
+      "price": "&#x20B9; 1,249",
+      "crossprice": "1,599",
+      "image": "assets/preworkout/WhatsApp Image 2024-04-30 at 2.30.02 PM.jpeg"
+    },
+    {
+      "id": "2",
+      "name": "BIG MUSCLES NUTRITION freak (500g)",
+      "price": "&#x20B9; 1,149",
+      "crossprice": "1,499",
+      "image": "assets/preworkout/WhatsApp Image 2024-04-30 at 2.30.26 PM.jpeg"
+    },
+    {
+      "id": "3",
+      "name": "GNC PRO performance pre-workout (500g)",
+      "price": "&#x20B9; 1,249",
+      "crossprice": "1,499",
+      "image": "assets/preworkout/WhatsApp Image 2024-04-30 at 2.31.01 PM.jpeg"
+    },
+    {
+      "id": "4",
+      "name": "BIG MUSCLE NUTRITION Karnage (500g)",
+      "price": "&#x20B9; 1,349",
+      "crossprice": "1,599",
+      "image": "assets/preworkout/WhatsApp Image 2024-04-30 at 2.31.44 PM.jpeg"
+    },
+    {
+      "id": "5",
+      "name": "MUSCLE BLAZE pre-workout extreme (500g)",
+      "price": "&#x20B9; 1,599",
+      "crossprice": "2099",
+      "image": "assets/preworkout/WhatsApp Image 2024-04-30 at 2.32.21 PM.jpeg"
+    },
+    {
+      "id": "6",
+      "name": "WELLCORE warrior pre-workout (500g)",
+      "price": "&#x20B9; 1,049",
+      "crossprice": "1,399",
+      "image": "assets/preworkout/WhatsApp Image 2024-04-30 at 2.33.01 PM.jpeg"
+    }
+  ],
+  "creatine": [
+    {
+      "id": "7",
+      "name": "WELLCORE creatine monohydrate (100g)",
+      "price": "&#x20B9; 499",
+      "image": "assets/creatine/WhatsApp Image 2024-04-30 at 2.16.05 PM.jpeg"
+    },
+    {
+      "id": "8",
+      "name": "AVVATAR micronized creatine monohydrate (100g)",
+      "price": "&#x20B9; 499",
+      "image": "assets/creatine/WhatsApp Image 2024-04-30 at 2.16.51 PM.jpeg"
+    },
+    {
+      "id": "9",
+      "name": "NAKPRO creatine monohydrate (100g)",
+      "price": "&#x20B9; 399",
+      "image": "assets/creatine/WhatsApp Image 2024-04-30 at 2.17.30 PM.jpeg"
+    },
+    {
+      "id": "10",
+      "name": "MUSCLE BLAZE CREAMP creatine monohydrate (100g)",
+      "price": "&#x20B9; 699",
+      "image": "assets/creatine/WhatsApp Image 2024-04-30 at 2.18.17 PM.jpeg"
+    },
+    {
+      "id": "11",
+      "name": "NUTRABAY creatine (100g)",
+      "price": "&#x20B9; 356",
+      "image": "assets/creatine/WhatsApp Image 2024-04-30 at 2.19.11 PM.jpeg"
+    },
+    {
+      "id": "12",
+      "name": "BIG MUSCLES creatine (100g)",
+      "price": "&#x20B9; 499",
+      "image": "assets/creatine/WhatsApp Image 2024-04-30 at 2.19.47 PM.jpeg"
+    }
+  ],
+  "wheyProtein": [
+    {
+      "id": "13",
+      "name": "BIG MUSCLES gold whey (1kg)",
+      "price": "&#x20B9; 2,349",
+      "crossprice": "2,599",
+      "image": "assets/whey/WhatsApp Image 2024-04-30 at 2.22.51 PM.jpeg"
+    },
+    {
+      "id": "14",
+      "name": "optimum nutrition gold standard whey (1kg)",
+      "price": "&#x20B9; 1,989",
+      "crossprice": "2,199",
+      "image": "assets/whey/WhatsApp Image 2024-04-30 at 2.23.24 PM.jpeg"
+    },
+    {
+      "id": "15",
+      "name": "MUSCLE BLAZE raw whey protein (1kg)",
+      "price": "&#x20B9; 2,549",
+      "crossprice": "2,999",
+      "image": "assets/whey/WhatsApp Image 2024-04-30 at 2.23.56 PM.jpeg"
+    },
+    {
+      "id": "16",
+      "name": "avvatar whey protein (1kg)",
+      "price": "&#x20B9; 2,159",
+      "crossprice": "2,599",
+      "image": "assets/whey/WhatsApp Image 2024-04-30 at 2.24.25 PM.jpeg"
+    },
+    {
+      "id": "17",
+      "name": "GNC PRO 100% whey (1kg)",
+      "price": "&#x20B9; 1,799",
+      "crossprice": "2,099",
+      "image": "assets/whey/WhatsApp Image 2024-04-30 at 2.24.57 PM.jpeg"
+    },
+    {
+      "id": "18",
+      "name": "FUEL ONE whey max (1kg)",
+      "price": "&#x20B9; 1,699",
+      "crossprice": "1,899",
+      "image": "assets/whey/WhatsApp Image 2024-04-30 at 2.25.24 PM.jpeg"
+    }
+  ],
+  "bcaaPowder": [
+    {
+      "id": "19",
+      "name": "XTEND BCAA (1kg)",
+      "price": "&#x20B9; 1,499",
+      "crossprice": "1,999",
+      "image": "assets/bcaa/WhatsApp Image 2024-04-30 at 2.11.43 PM.jpeg"
+    },
+    {
+      "id": "20",
+      "name": "GNC Gold Series BCAA (1kg)",
+      "price": "&#x20B9; 1,799",
+      "crossprice": "2,499",
+      "image": "assets/bcaa/WhatsApp Image 2024-04-30 at 2.12.20 PM.jpeg"
+    },
+    {
+      "id": "21",
+      "name": "NUTRABAY Gold BCAA(1kg)",
+      "price": "&#x20B9; 1,599",
+      "crossprice": "1,899",
+      "image": "assets/bcaa/WhatsApp Image 2024-04-30 at 2.13.18 PM.jpeg"
+    },
+    {
+      "id": "22",
+      "name": "BIG MUSCLES NUTRITION BCAA (1kg)",
+      "price": "&#x20B9; 1,649",
+      "crossprice": "1,899",
+      "image": "assets/bcaa/WhatsApp Image 2024-04-30 at 2.13.51 PM.jpeg"
+    },
+    {
+      "id": "23",
+      "name": "MUSCLE BLAZE BCAA pro (1kg)",
+      "price": "&#x20B9; 1,999",
+      "crossprice": "2099",
+      "image": "assets/bcaa/WhatsApp Image 2024-04-30 at 2.14.20 PM.jpeg"
+    },
+    {
+      "id": "24",
+      "name": "Optimum nutrition BCAA(1kg)",
+      "price": "&#x20B9; 1,756",
+      "crossprice": "1,999",
+      "image": "assets/bcaa/WhatsApp Image 2024-04-30 at 2.15.05 PM.jpeg"
+    }
+  ],
+  "weightGainer": [
+    {
+      "id": "25",
+      "name": "NUTRELA weight gain (1kg)",
+      "price": "&#x20B9; 1,299",
+      "crossprice": "1,599",
+      "image": "assets/weight/WhatsApp Image 2024-04-30 at 2.26.14 PM.jpeg"
+    },
+    {
+      "id": "26",
+      "name": "BOLT mass gainer (1kg)",
+      "price": "&#x20B9; 1,697",
+      "crossprice": "1,799",
+      "image": "assets/weight/WhatsApp Image 2024-04-30 at 2.26.35 PM.jpeg"
+    },
+    {
+      "id": "27",
+      "name": "BIG MUSCLES NUTRITION real mass gainer (1kg)",
+      "price": "&#x20B9; 1,899",
+      "crossprice": "1,999",
+      "image": "assets/weight/WhatsApp Image 2024-04-30 at 2.27.02 PM.jpeg"
+    },
+    {
+      "id": "28",
+      "name": "OPTIMUM NUTRITION serious mass (1kg)",
+      "price": "&#x20B9; 1,899",
+      "crossprice": "1,999",
+      "image": "assets/weight/WhatsApp Image 2024-04-30 at 2.27.32 PM.jpeg"
+    },
+    {
+      "id": "29",
+      "name": "MUSCLE BLAZE weight gainer (1kg) ",
+      "price": "&#x20B9; 2,159",
+      "crossprice": "2599",
+      "image": "assets/weight/WhatsApp Image 2024-04-30 at 2.28.02 PM.jpeg"
+    },
+    {
+      "id": "30",
+      "name": "GNC PRO weight gainer (1kg)",
+      "price": "&#x20B9; 1,659",
+      "crossprice": "1,899",
+      "image": "assets/weight/WhatsApp Image 2024-04-30 at 2.28.44 PM.jpeg"
+    }
+  ]
+}
